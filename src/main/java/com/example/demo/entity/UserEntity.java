@@ -1,9 +1,8 @@
-package com.example.demo.Entity;
+package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class UserEntity {
@@ -14,6 +13,8 @@ public class UserEntity {
         private String userName;
         private String email;
         private String password;
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+        private List<ToDoEntity> toDo;
 
     public UserEntity() {
     }
@@ -56,5 +57,13 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<ToDoEntity> getToDo() {
+        return toDo;
+    }
+
+    public void setToDo(List<ToDoEntity> toDo) {
+        this.toDo = toDo;
     }
 }
